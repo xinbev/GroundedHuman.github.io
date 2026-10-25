@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#f8f7f3" />
+    <meta name="description" content="GroundedHuman reconstructs human motion, scene geometry, and camera motion from monocular video in a shared metric world. Explore supplementary video comparisons." />
+    <link rel="icon" href="public/favicon.svg" type="image/svg+xml" />
+    <title>GroundedHuman — Dynamic Human–Scene Reconstruction</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="script.js" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-header">
+      <div class="header-inner">
+        <a class="brand" href="#top" aria-label="GroundedHuman home"><span class="brand-mark">G<span>H</span></span><span>GroundedHuman</span></a>
+        <nav class="site-nav" aria-label="Page sections">
+          <a href="#comparison">Results</a>
+          <a href="#method">Method</a>
+          <a href="#evidence">Figures</a>
+          <a href="#abstract">Abstract</a>
+        </nav>
+        <a class="header-cta" href="public/assets/paper/GroundedHuman_arxiv.pdf" target="_blank" rel="noopener" aria-label="Open GroundedHuman paper PDF in a new tab">Paper PDF <span aria-hidden="true">↗</span></a>
+      </div>
+    </header>
+
+    <main id="main">
+      <section class="hero section-wrap" id="top" aria-labelledby="page-title">
+        <p class="overline">Research project · supplementary visualizations</p>
+        <h1 id="page-title">GroundedHuman</h1>
+        <p class="paper-subtitle">Implicit Interaction Grounding for Dynamic Human–Scene Reconstruction</p>
+        <p class="authors">Anonymous Authors</p>
+        <p class="hero-summary">From a monocular video, reconstruct human motion and the surrounding scene in one shared metric world.</p>
+        <div class="hero-actions">
+          <a class="pill pill-primary" href="public/assets/paper/GroundedHuman_arxiv.pdf" target="_blank" rel="noopener" aria-label="Open GroundedHuman paper PDF in a new tab">Paper PDF <span aria-hidden="true">↗</span></a>
+          <a class="pill pill-outline" href="#comparison">Explore results <span aria-hidden="true">↓</span></a>
+          <a class="pill pill-outline" href="#abstract">Read abstract <span aria-hidden="true">↓</span></a>
+        </div>
+
+        <figure class="hero-figure">
+          <div class="hero-image-wrap"><img src="public/assets/paper/hero-reconstruction.jpg" alt="GroundedHuman reconstruction showing successive human poses placed within a 3D outdoor scene" /></div>
+          <figcaption><span>01 / A SHARED METRIC WORLD</span><span>Excerpt from the paper teaser figure</span></figcaption>
+        </figure>
+      </section>
+
+      <section class="comparison-section section-wrap" id="comparison" aria-labelledby="comparison-title">
+        <div class="section-head">
+          <div><p class="overline">Qualitative results / 01</p><h2 id="comparison-title">Compare the reconstruction.</h2></div>
+          <p class="section-intro">Choose an image thumbnail to view the input video alongside Human3R, UniSH, and GroundedHuman. Each panel opens at full size.</p>
+        </div>
+
+        <div class="case-tabs" role="tablist" aria-label="Reconstruction sequences" id="case-tabs"></div>
+        <div class="case-heading"><div><p class="case-number" id="case-number">01 / 05</p><h3 id="case-title">Street corner</h3></div><p id="case-description">Single-person · outdoor scene</p></div>
+        <div class="comparison-grid" id="comparison-grid" aria-live="polite"></div>
+        <div class="playback-bar" aria-label="Synchronized video controls">
+          <button class="play-all" id="play-all" type="button" disabled aria-label="Play available videos"><span class="play-icon" aria-hidden="true">▶</span><span id="play-label">Play videos</span></button>
+          <label class="sr-only" for="video-progress">Seek through available videos</label>
+          <input id="video-progress" type="range" min="0" max="1000" value="0" disabled />
+          <span class="time-readout" id="time-readout">00:00 / 00:00</span>
+        </div>
+        <div class="comparison-foot"><p id="media-status">Loading supplementary videos…</p><button class="next-case" id="next-case" type="button">Next sequence <span aria-hidden="true">→</span></button></div>
+      </section>
+
+      <section class="method-section" id="method" aria-labelledby="method-title">
+        <div class="section-wrap">
+          <div class="section-head"><div><p class="overline">The approach / 02</p><h2 id="method-title">Grounding starts with the body.</h2></div><p class="section-intro">Human geometry guides where scene evidence is gathered. The resulting relationship informs both metric calibration and body placement.</p></div>
+          <div class="method-steps">
+            <article class="method-step"><span class="step-number">01</span><div><h3>Body-Aligned Metric Calibration</h3><p>Metric body anchors query nearby scene evidence. Their predictions calibrate scene depth and camera translation to a shared metric reference across the video.</p></div></article>
+            <article class="method-step"><span class="step-number">02</span><div><h3>Hierarchical Interaction Grounding</h3><p>Body regions gather local surface and wider scene context, then refine the person’s global position while preserving pose and shape.</p></div></article>
+          </div>
+          <figure class="method-figure"><button class="method-figure-image" type="button" data-figure="public/assets/paper/method-overview.png" data-alt="GroundedHuman method overview" aria-label="Expand GroundedHuman method overview"><img src="public/assets/paper/method-overview.png" alt="GroundedHuman method diagram with initial scene and human observations, body-aligned metric calibration, and hierarchical interaction grounding" loading="lazy" /></button><figcaption>Method overview from the manuscript. Select the figure to inspect it at full size.</figcaption><button class="figure-expand" type="button" data-figure="public/assets/paper/method-overview.png" data-alt="GroundedHuman method overview">Expand figure <span aria-hidden="true">↗</span></button></figure>
+        </div>
+      </section>
+
+      <section class="evidence-section section-wrap" id="evidence" aria-labelledby="evidence-title">
+        <div class="section-head"><div><p class="overline">Selected figures / 03</p><h2 id="evidence-title">Motion in context.</h2></div><p class="section-intro">The manuscript shows reconstructed bodies within scenes and compares how methods position a body relative to nearby surfaces.</p></div>
+        <div class="evidence-grid">
+          <figure class="evidence-card"><button type="button" data-figure="public/assets/paper/temporal-reconstruction.png" data-alt="Temporal human-scene reconstruction and world trajectory figure"><img src="public/assets/paper/temporal-reconstruction.png" alt="Input frames, metric 4D reconstructions, and world trajectories for three motion sequences" loading="lazy" /><span>View full figure ↗</span></button><figcaption><strong>Temporal reconstruction</strong><span>Input frames, reconstructed humans in the scene, and world trajectories.</span></figcaption></figure>
+          <figure class="evidence-card"><button type="button" data-figure="public/assets/paper/human-scene-comparison.png" data-alt="Human-scene placement comparison figure"><img src="public/assets/paper/human-scene-comparison.png" alt="Input, UniSH, Human3R, and GroundedHuman human-scene placement comparisons" loading="lazy" /><span>View full figure ↗</span></button><figcaption><strong>Human–scene alignment</strong><span>Lying, reclining, and seated poses compared with UniSH and Human3R.</span></figcaption></figure>
+        </div>
+      </section>
+
+      <section class="abstract-section" id="abstract" aria-labelledby="abstract-title"><div class="section-wrap abstract-layout"><div><p class="overline">About the work / 04</p><h2 id="abstract-title">Abstract</h2></div><div class="abstract-copy"><p>Capturing human motion and surroundings from monocular video requires both temporally coherent reconstruction and plausible human–scene alignment. GroundedHuman is a feed-forward framework that reconstructs human motion, scene geometry, and camera motion in a shared metric world.</p><p>The body determines where to inspect scene geometry. Body-aligned scene attention calibrates the scene with metric human observations, while hierarchical interaction grounding refines human positioning using surrounding scene context. The goal is coherent reconstruction with fewer floating and penetration artifacts.</p><p class="reference-note">Comparison videos correspond to the five cases in the supplied supplementary PDF. The method and result figures come from the GroundedHuman v3 manuscript.</p></div></div></section>
+    </main>
+
+    <footer class="site-footer"><div class="section-wrap"><span>GroundedHuman</span><span>Dynamic human–scene reconstruction</span><a href="#top">Back to top ↑</a></div></footer>
+
+    <div class="lightbox" id="lightbox" hidden aria-hidden="true"><div class="lightbox-scrim" data-close-lightbox></div><div class="lightbox-dialog" role="dialog" aria-modal="true" aria-labelledby="lightbox-title"><div class="lightbox-header"><div><p class="overline" id="lightbox-kicker">CASE 01 / 05</p><h2 id="lightbox-title">Street corner · Ours</h2></div><button type="button" class="lightbox-close" data-close-lightbox aria-label="Close viewer">×</button></div><div class="lightbox-body" id="lightbox-body"></div><div class="lightbox-footer"><p id="lightbox-caption">Frame preview</p><div class="lightbox-nav"><button type="button" id="lightbox-prev">← Previous</button><button type="button" id="lightbox-next">Next →</button></div></div></div></div>
+  </body>
+</html>
