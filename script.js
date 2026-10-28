@@ -4,30 +4,30 @@ const poster = number => `public/assets/posters/frame-${String(number).padStart(
 const movie = (caseNumber, method) => `public/assets/videos/case-${String(caseNumber).padStart(2, '0')}-${method}.mp4`;
 
 const cases = [
-  { title: 'Street corner', description: 'Single-person · outdoor street scene', panels: [
+  { title: 'Outdoor warmup', description: 'Single-person · outdoor warmup sequence', panels: [
     { label: 'Input', role: 'Source video', image: poster(0), video: movie(1, 'input') },
     { label: 'Human3R', role: 'Baseline', image: poster(3), video: movie(1, 'human3r') },
     { label: 'UniSH', role: 'Baseline', image: poster(1), video: movie(1, 'unish') },
     { label: 'Ours', role: 'GroundedHuman', image: poster(2), video: movie(1, 'ours') }
   ] },
-  { title: 'Winter park', description: 'Single-person · walking sequence', panels: [
+  { title: 'Outdoor parcours', description: 'Single-person · outdoor movement sequence', panels: [
     { label: 'Input', role: 'Source video', image: poster(4), video: movie(2, 'input') },
     { label: 'Human3R', role: 'Baseline', image: poster(5), video: movie(2, 'human3r') },
     { label: 'UniSH', role: 'Baseline', image: poster(6), video: movie(2, 'unish') },
     { label: 'Ours', role: 'GroundedHuman', image: poster(7), video: movie(2, 'ours') }
   ] },
-  { title: 'Campus walk', description: 'Single-person · outdoor movement', panels: [
+  { title: 'Push-up sequence', description: 'Single-person · outdoor exercise sequence', panels: [
     { label: 'Input', role: 'Source video', image: poster(10), video: movie(3, 'input') },
     { label: 'Human3R', role: 'Baseline', image: poster(9), video: movie(3, 'human3r') },
     { label: 'UniSH', role: 'Baseline', image: poster(8), video: movie(3, 'unish') },
     { label: 'Ours', role: 'GroundedHuman', image: poster(11), video: movie(3, 'ours') }
   ] },
-  { title: 'Studio duet', description: 'Multi-person · indoor sequence', panels: [
+  { title: 'Dance sequence', description: 'Multi-person · indoor dance sequence', panels: [
     { label: 'Input', role: 'Source video', image: poster(13), video: movie(4, 'input') },
     { label: 'Human3R', role: 'Baseline', image: poster(14), video: movie(4, 'human3r') },
     { label: 'Ours', role: 'GroundedHuman', image: poster(12), video: movie(4, 'ours') }
   ] },
-  { title: 'Stairway group', description: 'Multi-person · outdoor stairway', panels: [
+  { title: 'Group sequence', description: 'Multi-person · outdoor sequence', panels: [
     { label: 'Input', role: 'Source video', image: poster(17), video: movie(5, 'input') },
     { label: 'Human3R', role: 'Baseline', image: poster(15), video: movie(5, 'human3r') },
     { label: 'Ours', role: 'GroundedHuman', image: poster(16), video: movie(5, 'ours') }
@@ -51,6 +51,15 @@ const lightboxKicker = document.querySelector('#lightbox-kicker');
 const lightboxCaption = document.querySelector('#lightbox-caption');
 const lightboxPrev = document.querySelector('#lightbox-prev');
 const lightboxNext = document.querySelector('#lightbox-next');
+const heroVideo = document.querySelector('.hero-image-wrap video');
+
+function startHeroVideo() {
+  if (document.hidden || !heroVideo.paused) return;
+  heroVideo.play().catch(() => {});
+}
+
+heroVideo.addEventListener('canplay', startHeroVideo, { once: true });
+startHeroVideo();
 
 let activeCase = 0;
 let activePanel = 0;
@@ -347,5 +356,8 @@ new IntersectionObserver(([entry]) => {
 
 document.addEventListener('visibilitychange', () => {
   if (document.hidden) pauseVideos();
-  else maybeAutoplay();
+  else {
+    startHeroVideo();
+    maybeAutoplay();
+  }
 });
